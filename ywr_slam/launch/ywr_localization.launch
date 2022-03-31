@@ -13,9 +13,9 @@
         <arg name="gyro_fps"      value="400"/>
         <arg name="accel_fps"     value="250"/>
 	<arg name="depth_width" value="848"/>
-	<arg name="depth_height" value="480"/>
+	<arg name="depth_height" value="400"/>
 	<arg name="color_width" value="848"/>
-	<arg name="color_height" value="480"/>
+	<arg name="color_height" value="400"/>
 	<arg name="depth_fps" value="30"/>
     	<arg name="color_fps" value="30"/>
   </include>
@@ -29,7 +29,7 @@
 	<!--param name="/imu/data" type="string" value="/rtabmap/imu"/-->
   </node>
 
-  <include file="$(find ywr_slam)/launch/modified_rtabmap.launch">
+  <include file="$(find ywr_slam)/launch/ywr_localization_rtabmap.launch">
 	<arg name="args" value="--Optimizer/GravitySigma 0.3"/>
 	<arg name="database_path" value="~/.ros/rtabmap_3.db" />
         <arg name="rgb_topic" value="/camera/color/image_raw"/>
@@ -48,22 +48,44 @@
 	<arg name="visual_odometry" value="true"/>
 	<arg name="icp_odometry" value="false"/>
 	<arg name="odom_sensor_sync" value="false"/>
-	<!--arg name="localization" value="true"/-->
+	<arg name="localization" value="true"/>
   </include>
 
 
 	<!-- Launch node for creating a laserscan from the depth data. -->
-  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+	<node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
        <remap from="image"     to="/camera/aligned_depth_to_color/image_raw"/>
        <remap from="camera_info" to="/camera/depth/camera_info"/>
        <remap from="scan" to="/scan"/>
        <param name="range_max" type="double" value="4.0"/>
   </node>
 
-  #<node pkg="ywr" type="occupancyGridRepublisher.py" name="occupancy_grid_updater" output="screen">
-        <param name="robot_frame" type="string" value="camera_link"/>
-  </node>
+<!--
+    <include file="$(find robot_localization)/launch/ukf_template.launch"/>
+    <param name="/ukf_se/frequency" value="300"/>
+    <param name="/ukf_se/base_link_frame" value="camera_link"/>
+    <param name="/ukf_se/odom0" value="rtabmap/odom"/>
+    <rosparam param="/ukf_se/odom0_config">[true,true,true,
+                                            true,true,true,
+                                            true,true,true,
+                                            true,true,true,
+                                            true,true,true]
+    </rosparam>
+    <param name="/ukf_se/odom0_relative" value="true"/>
+    <param name="/ukf_se/odom0_pose_rejection_threshold" value="10000000"/>
+    <param name="/ukf_se/odom0_twist_rejection_threshold" value="10000000"/>
 
-  <node pkg="tf" type="static_transform_publisher" name="camera_to_bot" args="-0.44815 -0.0475 -0.2121 0 0 0 1 camera_link base_link 20" />
+    <param name="/ukf_se/imu0" value="/imu/data"/>
+    <rosparam param="/ukf_se/imu0_config">[false, false, false,
+                                           true,  true,  true,
+                                           true,  true,  true,
+                                           true,  true,  true,
+                                           true,  true,  true]
+    </rosparam>
+    <param name="/ukf_se/imu0_differential" value="true"/>
+    <param name="/ukf_se/imu0_relative" value="false"/>
+    <param name="/ukf_se/use_control" value="false"/>
+-->
+    <!-- <param name="/ukf_se/odom0_config" value="{true,true,true,}"/> -->
 
 </launch>

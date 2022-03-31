@@ -29,8 +29,8 @@
 	<!--param name="/imu/data" type="string" value="/rtabmap/imu"/-->
   </node>
 
-  <include file="$(find ywr_slam)/launch/modified_rtabmap.launch">
-	<arg name="args" value="--Optimizer/GravitySigma 0.3"/>
+  <include file="$(find ywr_slam)/launch/ywr_modified_rtabmap.launch">
+	<arg name="args" value="--delete-db-on-start --Optimizer/GravitySigma 0.3"/>
 	<arg name="database_path" value="~/.ros/rtabmap_3.db" />
         <arg name="rgb_topic" value="/camera/color/image_raw"/>
         <arg name="depth_topic" value="/camera/aligned_depth_to_color/image_raw"/>
@@ -60,7 +60,7 @@
        <param name="range_max" type="double" value="4.0"/>
   </node>
 
-  #<node pkg="ywr" type="occupancyGridRepublisher.py" name="occupancy_grid_updater" output="screen">
+  #<node pkg="ywr_slam" type="occupancyGridRepublisher.py" name="occupancy_grid_updater" output="screen">
         <param name="robot_frame" type="string" value="camera_link"/>
   </node>
 
