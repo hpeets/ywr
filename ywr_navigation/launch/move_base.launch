@@ -1,6 +1,5 @@
 <launch>
   <!-- Arguments -->
-  <!--arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/-->
   <arg name="cmd_vel_topic" default="/cmd_vel" />
   <arg name="odom_topic" default="odom" />
   <arg name="odom_topic" value="rtabmap/odom" />
@@ -12,12 +11,14 @@
   <!-- move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
-    <rosparam file="$(find ywr)/config/costmap_common_params_$(arg model).yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find ywr)/config/costmap_common_params_$(arg model).yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find ywr)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find ywr)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find ywr)/config/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find ywr)/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find ywr)/config/move_base_params.yaml" command="load" />
+    <!--rosparam file="$(find ywr)/config/move_base_params.yaml" command="load" /-->
+	<!--not included on rtabmap outdoor stereo-->
     <rosparam file="$(find ywr)/config/dwa_local_planner_params_$(arg model).yaml" command="load" />
+	<!--not using base local planner due to unfamiliarity-->
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
     <remap from="odom" to="$(arg odom_topic)"/>
     <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
