@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="asb">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ywr">
 
   <!-- Xacro arguments for realsense d455 camera -->
   <xacro:arg name="realsense_enable" default="true" />
@@ -8,7 +8,7 @@
   
   <!-- Included URDF/XACRO Files -->
   <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro"/>
-  <xacro:include filename="$(find asb_description)/urdf/macros.xacro"/>
+  <xacro:include filename="$(find ywr_description)/urdf/macros.xacro"/>
 
 <!--=========================Defining Materials===================================--> 
  <material name="blue">
@@ -27,7 +27,7 @@
     <color rgba="0 0.8 0 1"/>
   </material>
 <!--============================================================-->
- <!-- Root link of ASB -->
+ <!-- Root link of ywr -->
 
  <link name="base_link" />
  
