@@ -48,7 +48,6 @@
 	<arg name="visual_odometry" value="true"/>
 	<arg name="icp_odometry" value="false"/>
 	<arg name="odom_sensor_sync" value="false"/>
-        <remap from="grid_map" to="/map"/>
 	<!--arg name="localization" value="true"/-->
   </include>
 
