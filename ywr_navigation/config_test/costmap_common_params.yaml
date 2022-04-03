@@ -4,6 +4,7 @@ footprint: [[ 0.28,  0.28], [-0.28,  0.28], [-0.28, -0.28], [ 0.28, -0.28]]
 footprint_padding: 0.03
 #robot_radius: ir_of_robot
 inflation_radius: 0.55
+transform_tolerance: 1
 
 observation_sources: laser_scan
 laserscan: {sensor_frame: camera_link, data_type: LaserScan, topic: scan, marking: true, clearing: true}
