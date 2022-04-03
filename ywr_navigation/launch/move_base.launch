@@ -3,7 +3,7 @@
   <arg name="cmd_vel_topic" default="/cmd_vel" />
   <!--arg name="odom_topic" default="odom" /-->
   <arg name="odom_topic" value="rtabmap/odom" />
-  <arg name="move_forward_only" default="false"/>
+  <arg name="move_forward_only" default="true"/>
   
   <!-- Run the map server --> 
   <!--node name="map_server" pkg="map_server" type="map_server" args="$(find ywr_navigation)/maps/ywr_map.pgm ywr_map.yaml"/-->
