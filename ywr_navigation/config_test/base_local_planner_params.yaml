@@ -10,7 +10,7 @@ TrajectoryPlannerROS:
   min_vel_theta: -0.550
   min_in_place_rotational_vel: 0.25
 
-	#diff drive config
+  #diff drive config
   holonomic_robot: false
 
   xy_goal_tolerance:  0.20
