@@ -7,7 +7,7 @@ TrajectoryPlannerROS:
   max_vel_x:  0.4
   min_vel_x:  0.1
   max_vel_theta: 0.550
-	min_vel_theta: -0.550
+  min_vel_theta: -0.550
   min_in_place_rotational_vel: 0.25
 
 	#diff drive config
