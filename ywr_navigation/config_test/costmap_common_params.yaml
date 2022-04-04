@@ -5,6 +5,8 @@ footprint_padding: 0.03
 #robot_radius: ir_of_robot
 inflation_radius: 0.75
 transform_tolerance: 0.75
+#cost_scaling_factor: 5
+#map_type: costmap
 
 observation_sources: laser_scan
 laserscan: {sensor_frame: camera_link, data_type: LaserScan, topic: scan, marking: true, clearing: true}
