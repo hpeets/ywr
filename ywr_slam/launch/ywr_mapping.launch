@@ -64,6 +64,7 @@
         <param name="robot_frame" type="string" value="camera_link"/>
   </node>
 
-  <node pkg="tf" type="static_transform_publisher" name="camera_to_bot" args="-0.44815 -0.0475 -0.2121 0 0 0 1 camera_link base_link 20" />
+  <!--node pkg="tf" type="static_transform_publisher" name="camera_to_bot" args="-0.44815 -0.0475 -0.2121 0 0 0 1 camera_link base_link 20" /-->
+  <node pkg="tf" type="static_transform_publisher" name="camera_to_bot" args="-0.18 0.0 -0.26 0 0 0 1 camera_link base_link 20" />
 
 </launch>
