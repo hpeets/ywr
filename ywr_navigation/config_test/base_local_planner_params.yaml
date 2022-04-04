@@ -1,10 +1,12 @@
 TrajectoryPlannerROS:
 
   # Current limits based on AZ3 standalone configuration.
-  acc_lim_x:  0.25
-  acc_lim_theta: 1.0
-  max_vel_x:  0.35
-  min_vel_x:  0.15
+  acc_lim_x:  2.0
+  acc_lim_theta: 2.5
+  max_vel_x:  0.4
+  min_vel_x:  0.175
+  max_vel_y: 0.0
+  min_vel_y: 0.0
   max_vel_theta: 1.0
   min_vel_theta: -1.0
   min_in_place_vel_theta: 0.8
