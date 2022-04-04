@@ -60,7 +60,7 @@
        <param name="range_max" type="double" value="4.0"/>
   </node>
 
-  #<node pkg="ywr_slam" type="occupancyGridRepublisher.py" name="occupancy_grid_updater" output="screen">
+  <node pkg="ywr_slam" type="occupancyGridRepublisher.py" name="occupancy_grid_updater" output="screen">
         <param name="robot_frame" type="string" value="camera_link"/>
   </node>
 
