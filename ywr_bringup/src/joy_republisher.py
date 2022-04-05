@@ -7,9 +7,11 @@ from geometry_msgs.msg import Twist
 vel = Twist()
 
 def joyCallback(data):
-    global vel
-    vel.linear.y = data.axes[1]
-    vel.linear.x = data.axes[0]
+	global vel
+	vel.linear.y = data.axes[1]
+	vel.linear.x = data.axes[0]
+	vel.angular.x = float(data.buttons[7])
+	vel.angular.y = data.axes[2]
 
 # Function to send the robot the origin as a goal when exploration is complete
 def joyRepublisher():
