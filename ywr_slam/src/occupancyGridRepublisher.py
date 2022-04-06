@@ -2,7 +2,7 @@
 import rospy, math
 from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import OccupancyGrid
-from std_msgs.msg import UInt16
+from std_msgs.msg import Int8
 import tf
 import numpy as np
 
@@ -60,20 +60,20 @@ def gridCallback(data):
 
 def pointsCallback(data):
 	global xPoint, yPoint, pointsCounter, cornerPoints
-	if(data.data==pointsCounter):
+	if(data.data==pointsCounter-1):
 		cornerPoints[pointsCounter,0] = xPoint
 		cornerPoints[pointsCounter,1] = yPoint
 		pointsCounter+=1
 
 # Function to send the robot the origin as a goal when exploration is complete
 def ogUpdater():
-	global oGrid, xPoint, yPoint, listener
+	global oGrid, xPoint, yPoint
     # Initialize ros subscriber to move_base/cancel
 	rospy.init_node('occupancy_grid_updater', anonymous=True)
 	listener = tf.TransformListener()
 	# Create a subscriber to move_base/cancel topic
 	rospy.Subscriber('rtabmap/grid_map', OccupancyGrid, gridCallback)
-	rospy.Subscriber('dwCorners', UInt16, pointsCallback)
+	rospy.Subscriber('dwCorners', Int8, pointsCallback)
     
 	# Initialize ROS publisher to move_base_simple/goal
 	pub = rospy.Publisher('final_grid_map', OccupancyGrid, queue_size=10)
@@ -88,6 +88,8 @@ def ogUpdater():
 			continue
 		xPoint = trans[0]
 		yPoint = trans[1]
+		print(xPoint)
+		print(yPoint)
 		pub.publish(oGrid) 	
 		rate.sleep()
 
