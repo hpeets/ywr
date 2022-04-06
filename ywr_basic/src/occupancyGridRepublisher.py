@@ -36,8 +36,8 @@ def gridCallback(data):
 			for i in range(0,3):
 				cornerPointsOG[i,2] = (cornerPointsOG[i+1,0]-cornerPointsOG[i,0])/abs(cornerPointsOG[i+1,1]-cornerPointsOG[i,1])
 				cornerPointsOG[i,3] = (cornerPointsOG[i+1,1]-cornerPointsOG[i,1])/abs(cornerPointsOG[i+1,0]-cornerPointsOG[i,0])
-			cornerPointsOG[3,2] = (cornerPointsOG[0,0]-cornerPointsOG[3,0])/abs(cornerPointsOG[0,1]-cornerPointsOG[3,1])
-			cornerPointsOG[3,3] = (cornerPointsOG[0,1]-cornerPointsOG[3,1])/abs(cornerPointsOG[0,0]-cornerPointsOG[3,0])
+			#cornerPointsOG[3,2] = (cornerPointsOG[0,0]-cornerPointsOG[3,0])/abs(cornerPointsOG[0,1]-cornerPointsOG[3,1])
+			#cornerPointsOG[3,3] = (cornerPointsOG[0,1]-cornerPointsOG[3,1])/abs(cornerPointsOG[0,0]-cornerPointsOG[3,0])
 
 			for i in range(0,int(cornerPointsOG[1,1]-cornerPointsOG[0,1])+1):
 				xInc = round(float(i)*cornerPointsOG[0,2])
@@ -54,10 +54,10 @@ def gridCallback(data):
 				index = int(oGrid.info.width*(cornerPointsOG[2,1]+i))+int(cornerPointsOG[2,0]+xInc)
 				oGrid.data[index] = 100
 
-			for i in range(0,int(cornerPointsOG[0,0]-cornerPointsOG[3,0]),-1):
-				yInc = round(abs(float(i))*cornerPointsOG[3,3])
-				index = int(round(oGrid.info.width*(cornerPointsOG[3,1]+yInc)+cornerPointsOG[3,0]+i))
-				oGrid.data[index] = 100
+			# for i in range(0,int(cornerPointsOG[0,0]-cornerPointsOG[3,0]),-1):
+			# 	yInc = round(abs(float(i))*cornerPointsOG[3,3])
+			# 	index = int(round(oGrid.info.width*(cornerPointsOG[3,1]+yInc)+cornerPointsOG[3,0]+i))
+			# 	oGrid.data[index] = 100
 
 
 def pointsCallback(data):

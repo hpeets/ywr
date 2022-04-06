@@ -13,6 +13,7 @@ def joyCallback(data):
 	vel.angular.x = float(data.buttons[7])
 	vel.angular.y = data.axes[2]
 	vel.linear.z = data.axes[5]
+	vel.angular.z = float(data.buttons[0])
 
 # Function to send the robot the origin as a goal when exploration is complete
 def joyRepublisher():
