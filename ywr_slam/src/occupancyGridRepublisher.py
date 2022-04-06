@@ -83,7 +83,7 @@ def ogUpdater():
 	# Loop to keep the nodes going
 	while not rospy.is_shutdown():
 		try:
-			(trans, rot) = listener.lookupTransform('/camera_link', '/map', rospy.Time(0))
+			(trans, rot) = listener.lookupTransform('/map', '/camera_link', rospy.Time(0))
 		except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
 			continue
 		xPoint = trans[0]
