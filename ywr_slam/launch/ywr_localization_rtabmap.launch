@@ -396,6 +396,7 @@
       <remap from="fiducial_transforms"    to="$(arg fiducial_topic)"/>
       <remap from="odom"                   to="$(arg odom_topic)"/>
       <remap from="imu"                    to="$(arg imu_topic)"/>
+      <remap from="grid_map" to="/map"/>
       
       <!-- localization mode -->
       <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
