@@ -60,10 +60,10 @@
        <param name="range_max" type="double" value="4.0"/>
   </node>
 
-  <node pkg="ywr_slam" type="occupancyGridRepublisher.py" name="occupancy_grid_updater" output="screen">
-  </node>
+  <!--node pkg="ywr_slam" type="occupancyGridRepublisher.py" name="occupancy_grid_updater" output="screen">
+  </node-->
 
-  <!--node pkg="tf" type="static_transform_publisher" name="camera_to_bot" args="-0.44815 -0.0475 -0.2121 0 0 0 1 camera_link base_link 20" /-->
-  <node pkg="tf" type="static_transform_publisher" name="camera_to_bot" args="-0.18 0.0 -0.26 0 0 0 1 camera_link base_link 20" />
+  <node pkg="tf" type="static_transform_publisher" name="camera_to_bot" args="-0.44815 -0.0475 -0.2121 0 0 0 1 camera_link base_link 20" />
+  <!--node pkg="tf" type="static_transform_publisher" name="camera_to_bot" args="-0.18 0.0 -0.26 0 0 0 1 camera_link base_link 20" /-->
 
 </launch>

@@ -1,15 +1,25 @@
 obstacle_range: 2.5
 raytrace_range: 3.0
-footprint: [[ 0.28,  0.28], [-0.28,  0.28], [-0.28, -0.28], [ 0.28, -0.28]]
+footprint: [[ 0.28,  0.28], [-0.4,  0.28], [-0.4, -0.28], [ 0.28, -0.28]]
 footprint_padding: 0.03
 #robot_radius: ir_of_robot
-inflation_radius: 0.75
-transform_tolerance: 0.5
+inflation_radius: 0.4
+transform_tolerance: 0.8
 #cost_scaling_factor: 5
 #map_type: costmap
 
-observation_sources: laser_scan
-laserscan: {sensor_frame: camera_link, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+plugins:
+ - {name: static_layer, type: "costmap_2d::StaticLayer"}
+ - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+ - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+
+static_layer:
+  map_topic: /map
+  subscribe_to_updates: true
+
+obstacle_layer:
+  observation_sources: scan
+  scan: {sensor_frame: camera_link, data_type: LaserScan, topic: scan, marking: true, clearing: true}
 
 recovery_behaviors: [
     {name: conservative_clear, type: clear_costmap_recovery/ClearCostmapRecovery},

@@ -1,5 +1,5 @@
 global_costmap:
   global_frame: map
-  robot_base_frame: base_link #base_footprint also used by other robots.
+  robot_base_frame: camera_link #base_link #base_footprint also used by other robots.
   update_frequency: 2
-  static_map: false  
+
