@@ -15,13 +15,14 @@
     <rosparam file="$(find ywr_navigation)/config_test/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find ywr_navigation)/config_test/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find ywr_navigation)/config_test/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find ywr_navigation)/config_test/base_local_planner_params.yaml" command="load" />
+    <!--rosparam file="$(find ywr_navigation)/config_test/base_local_planner_params.yaml" command="load" /-->
     <!--rosparam file="$(find ywr_navigation)/config/move_base_params.yaml" command="load" /-->
 	<!--not included on rtabmap outdoor stereo-->
-    <!--rosparam file="$(find ywr_navigation)/config/dwa_local_planner_params.yaml" command="load" /-->
+    <rosparam file="$(find ywr_navigation)/config_test/dwa_local_planner_params.yaml" command="load" />
 	<!--not using base local planner due to unfamiliarity-->
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
     <remap from="odom" to="$(arg odom_topic)"/>
+	<remap from="laser_scan" to="scan"/>
     <!--param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" /-->
   </node>
 </launch>
