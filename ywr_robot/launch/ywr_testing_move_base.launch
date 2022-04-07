@@ -1,0 +1,6 @@
+<launch>
+    <include file="$(find ywr_bringup)/launch/ywr_bringup.launch" />
+    <include file="$(find ywr_slam)/launch/ywr_mapping.launch" />
+    <include file="$(find ywr_description)/launch/ywr_description.launch" />
+    <include file="$(find ywr_navigation)/launch/move_base.launch" />
+</launch>
