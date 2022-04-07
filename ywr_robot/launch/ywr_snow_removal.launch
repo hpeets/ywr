@@ -3,5 +3,5 @@
     <include file="$(find ywr_slam)/launch/ywr_localization.launch" />
     <include file="$(find ywr_description)/launch/ywr_description.launch" />
     <include file="$(find ywr_navigation)/launch/move_base.launch" />
-    <include file="$(find path_coverage_ros)/launch/path_coverage.launch" />
+    <include file="$(find path_coverage)/launch/path_coverage.launch" />
 </launch>
