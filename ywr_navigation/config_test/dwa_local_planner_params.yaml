@@ -43,5 +43,5 @@ DWAPlannerROS:
   oscillation_reset_dist: 0.05
 
 # Debugging
-  publish_traj_pc : true
-  publish_cost_grid_pc: true
+  #publish_traj_pc : true
+  #publish_cost_grid_pc: true
