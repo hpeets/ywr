@@ -20,13 +20,13 @@ This project is the code base for an autonomous ywardwork robot. Currently the f
 
 To run mapping:
 - Upload ArduinoOnly_OneStick_Speed_Attachment to the Arduino
-    ```roslaunch ywr_slam ywr_mapping.launch```
+	`roslaunch ywr_slam ywr_mapping.launch`
 
 ### Snow Removal
 
 To run snow removal:
 - Upload ArduinoOnly_Autonomous_Speed_Attachment to the Arduino
-    ```roslaunch ywr_robot ywr_snow_removal.launch```
+	`roslaunch ywr_robot ywr_snow_removal.launch`
 
 ## Authors
 
