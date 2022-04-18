@@ -1,8 +1,4 @@
-# Project Title
-
-Autonomous Yardwork Robot
-
-## Description
+# Autonomous Yardwork Robot
 
 This project is the code base for an autonomous ywardwork robot. Currently the focus is on snow removal capabilities. The software architecture is based on the turtlebot3 platform, with changes to work with the custom built robot.
 
