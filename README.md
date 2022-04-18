@@ -1,6 +1,6 @@
 # Autonomous Yardwork Robot
 
-This project is the code base for an autonomous ywardwork robot. Currently the focus is on snow removal capabilities. The software architecture is based on the turtlebot3 platform, with changes to work with the custom built robot.
+This project is the code base for an autonomous ywardwork robot. Currently the focus is on snow removal capabilities. The software architecture is based on the turtlebot3 platform, with changes to work with the custom built robot. Note: this package was developed in melodic and may not work on other distros.
 
 ## Dependencies
 
@@ -14,17 +14,19 @@ This project is the code base for an autonomous ywardwork robot. Currently the f
 - rtabmap_ros (https://github.com/introlab/rtabmap_ros/tree/melodic-devel)
 - teleop_twist_joy (https://github.com/ros-teleop/teleop_twist_joy/tree/melodic-devel)
 
-## Executing program
+## Executing Program
 
 ### Mapping
 
 To run mapping:
-- Upload Arduino_Only_OneStick_Speed_Attachment to the Arduino
-- Run ywr_mapping.launch
+- Upload ArduinoOnly_OneStick_Speed_Attachment to the Arduino
+    roslaunch ywr_slam ywr_mapping.launch
 
 ### Snow Removal
 
-
+To run snow removal:
+- Upload ArduinoOnly_Autonomous_Speed_Attachment to the Arduino
+    roslaunch ywr_robot ywr_snow_removal.launch
 
 ## Authors
 
@@ -33,8 +35,7 @@ Matthew Bugeya
 
 ## License
 
-This project is open for anyone to reuse for their own purpose. 
-To this end, the Authors listed above take no responsibility for any damages caused by the use or misuse of this software
+This project is open for anyone to reuse for their own purpose. To this end, the Authors listed above take no responsibility for any damages caused by the use or misuse of this software
 
 ## Acknowledgments
 
