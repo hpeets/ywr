@@ -52,13 +52,8 @@ int loopSpeed = 20; //milliseconds
 const int limit = 225; //motor pwm limit
 const unsigned int pwmOffset = 4;
 const unsigned int dirOffset = 22;
-//const float linGain = 0.4;
-//const float rotGain = 0.2;
-//float Kp[4] = {1, 1, 1, 1};
-//float Ki[4] = {0.001, 0.001, 0.001, 0.001};
-//float Kd[4] = {5, 5, 5, 5};
-float Kp[4] = {0.9, 0.9, 0.9, 0.9}; //
-float Ki[4] = {0.01, 0.01, 0.01, 0.01}; //{0.01, 0.01, 0.01, 0.01}; //0.02
+float Kp[4] = {0.9, 0.9, 0.9, 0.9};
+float Ki[4] = {0.01, 0.01, 0.01, 0.01};
 float Kd[4] = {2, 2, 2, 2};
 float augerSpeed = 150;
 
@@ -108,24 +103,8 @@ float one_tick_rad = 2 * M_PI / 221;
 void controllerInput(const geometry_msgs::Twist& joy) {
   linVel = joy.linear.x;
   rotVel = 0.23 * joy.angular.z;
-  //  auger = joy.buttons[7];
-  //  angle = joy.axes[2];
-  //  eStop = joy.buttons[1];
-  //  if (joy.buttons[3] == 1 and markerFlag == true) {
-  //    marker.data = markerCounter;
-  //  }
-  //  if (joy.buttons[3] == 0) {
-  //    markerFlag = false;
-  //  }
-  //  if (markerFlag == false and markerFlagLast == true) {
-  //    pub.publish(&marker);
-  //    markerCounter += 1;
-  //  }
-  //  markerFlagLast = markerFlag;
 }
 ros::NodeHandle nh;
-//ros::Publisher pub("dwCorners", &marker);
-//ros::Publisher pub1("wheelSpeed", &sveed);
 ros::Subscriber <geometry_msgs::Twist> sub("cmd_vel", &controllerInput);
 ros::Publisher joint_states_pub("joint_states", &joint_states);
 
@@ -135,10 +114,6 @@ void speedCalcs() {
     LRSpeed[1] = LRSpeed[0];
     LRSpeed[2] = linVel + rotVel;
     LRSpeed[3] = LRSpeed[2];
-//  LRSpeed[0] = 0.0;
-//  LRSpeed[1] = 0.0;
-//  LRSpeed[2] = 0.0;
-//  LRSpeed[3] = 0.0;
 }
 
 void jointStates() {
@@ -158,10 +133,9 @@ void jointStates() {
       }
       joint_states_vel[i]  = pulseValues[i] * one_tick_rad / deltaT * 1000;
     }
-    //joint_states_pos[i] = joint_states_pos[i]*3.8;
+    joint_states_pos[i] = joint_states_pos[i]*3.8;
     joint_states_vel[i] = joint_states_vel[i] * 3.3;
   }
-  //Serial.println(joint_states_vel[2]);
   joint_states.header.frame_id = "base_link";
   joint_states.name = joint_state_names;
   joint_states.position = joint_states_pos;
@@ -183,7 +157,6 @@ void pid () {
 
   //calculate speed in m/s
   for (int i = 0; i < 4; i++) {
-    //Serial.println(pulseValues[i]);
     motorSpeed[i] = pulseValues[i] * pulseToDistance / deltaT * 1000;
     pulseValues[i] = 0;
   }
@@ -207,14 +180,6 @@ void pid () {
     newMotorSpeed[0][i] = Kp[i] * error[0][i] + Ki[i] * error[1][i] + Kd[i] * error[2][i];
     lError[i] = error[0][i];
   }
-  //  //calculate error,process pid calcs, save old values
-  //  for (int i = 0; i < 4; i++) {
-  //    error[0][i] = LRSpeed[i] - motorSpeed[i];
-  //    newMotorSpeed[0][i] = (Kp[i] + Kd[i] / deltaT + Ki[i] * deltaT) * error[0][i] - (Kp[i] + 2 * Kd[i] / deltaT) * error[1][i] + Kd[i] / deltaT * error[2][i];
-  //    //newMotorSpeed[1][i] = newMotorSpeed[0][i];
-  //    error[2][i] = error[1][i];
-  //    error[1][i] = error[0][i];
-  //  }
 }
 
 void getPwm() {
@@ -250,7 +215,6 @@ void motorControl() {
     }
     analogWrite(i + pwmOffset, abs(LRSpeed[i]));
   }
-  //Serial.println(LRSpeed[2]);
 }
 
 //void attachmentControl() {
@@ -304,10 +268,7 @@ void setup() {
   nh.getHardware()->setBaud(115200);
   nh.initNode();
   nh.subscribe(sub);
-  //nh.advertise(pub);
-  //nh.advertise(pub1);
-  nh.advertise(joint_states_pub);
-  //Serial.begin(115200);
+  //nh.advertise(joint_states_pub);
   for (int i = 0; i < 4; i++) {
     pinMode(i + pwmOffset, OUTPUT);
   }
@@ -326,16 +287,6 @@ void setup() {
   pinMode(auger_D, OUTPUT);
   pinMode(servo_P, OUTPUT);
   digitalWrite(auger_D, LOW);
-//  for (int i = 0; i < 200; i++) {
-//    analogWrite(auger_P, i);
-//    delay(20);
-//  }
-//  delay(10000);
-//  for (int i = 200; i >0; i--) {
-//    analogWrite(auger_P, i);
-//    delay(20);
-//  }
-  //analogWrite(auger_P, 0);-+
   chute.attach(servo_P, 500, 2500);
   chute.write(135);
   currentAngle = 135;

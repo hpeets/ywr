@@ -53,11 +53,8 @@ const unsigned int pwmOffset = 4;
 const unsigned int dirOffset = 22;
 float linGain = 0.4;
 float rotGain = 0.2;
-//float Kp[4] = {1, 1, 1, 1};
-//float Ki[4] = {0.001, 0.001, 0.001, 0.001};
-//float Kd[4] = {5, 5, 5, 5};
-float Kp[4] = {0.9, 0.9, 0.9, 0.9}; //
-float Ki[4] = {0.01, 0.01, 0.01, 0.01}; //{0.01, 0.01, 0.01, 0.01}; //0.02
+float Kp[4] = {0.9, 0.9, 0.9, 0.9};
+float Ki[4] = {0.01, 0.01, 0.01, 0.01};
 float Kd[4] = {2, 2, 2, 2};
 float augerSpeed = 50;
 
@@ -149,10 +146,6 @@ void speedCalcs() {
   LRSpeed[1] = LRSpeed[0];
   LRSpeed[2] = linVel * linGain + rotVel * rotGain;
   LRSpeed[3] = LRSpeed[2];
-  //  LRSpeed[0] = 0;
-  //  LRSpeed[1] = 0;
-  //  LRSpeed[2] = 0.5;
-  //  LRSpeed[3] = 0.5;
 }
 
 //void jointStates() {
@@ -196,10 +189,8 @@ void pid () {
 
   //calculate speed in m/s
   for (int i = 0; i < 4; i++) {
-    //Serial.println(pulseValues[i]);
     motorSpeed[i] = pulseValues[i] * pulseToDistance / deltaT * 1000;
     pulseValues[i] = 0;
-    //tempSpeed[i] = motorSpeed[i];
   }
 
   //calculate error,process pid calcs, save old values
@@ -221,14 +212,6 @@ void pid () {
     newMotorSpeed[0][i] = Kp[i] * error[0][i] + Ki[i] * error[1][i] + Kd[i] * error[2][i];
     lError[i] = error[0][i];
   }
-  //  //calculate error,process pid calcs, save old values
-  //  for (int i = 0; i < 4; i++) {
-  //    error[0][i] = LRSpeed[i] - motorSpeed[i];
-  //    newMotorSpeed[0][i] = (Kp[i] + Kd[i] / deltaT + Ki[i] * deltaT) * error[0][i] - (Kp[i] + 2 * Kd[i] / deltaT) * error[1][i] + Kd[i] / deltaT * error[2][i];
-  //    //newMotorSpeed[1][i] = newMotorSpeed[0][i];
-  //    error[2][i] = error[1][i];
-  //    error[1][i] = error[0][i];
-  //  }
 }
 
 void getPwm() {
@@ -248,8 +231,6 @@ void getPwm() {
 }
 
 void motorControl() {
-  //LRSpeed[1] = LRSpeed[0];
-  //LRSpeed[3] = LRSpeed[2];
   for (int i = 0; i < 4; i++) {
 
     if (LRSpeed[i] < 0) {
@@ -264,7 +245,6 @@ void motorControl() {
     }
     analogWrite(i + pwmOffset, abs(LRSpeed[i]));
   }
-  //Serial.println(LRSpeed[2]);
 }
 
 void attachmentControl() {
@@ -328,7 +308,6 @@ void setup() {
   nh.subscribe(sub);
   nh.advertise(pub);
   //nh.advertise(joint_states_pub);
-  //Serial.begin(115200);
   for (int i = 0; i < 4; i++) {
     pinMode(i + pwmOffset, OUTPUT);
   }

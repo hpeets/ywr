@@ -1,17 +1,17 @@
 # Project Title
 
-Simple overview of use/purpose.
+Autonomous Yardwork Robot
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+This project is the code base for an autonomous ywardwork robot. Currently the focus is on snow removal capabilities. The software architecture is based on the turtlebot3 platform, with changes to work with the custom built robot.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+- Rtabmap_ros
+- 
 
 ### Installing
 
